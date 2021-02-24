@@ -10,6 +10,7 @@ type Receipt interface {
 
 	GetTransactionResult() TransactionResult
 	GetTransactionIndex() uint32
+	SetTransactionIndex(uint32)
 	GetStates() []State
 }
 
@@ -20,4 +21,5 @@ type State interface {
 	GetStateType() StateType
 	GetStateKey() string
 	GetBlockIndex() uint64
+	SetBlockIndex(uint64)
 }

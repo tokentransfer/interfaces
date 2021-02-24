@@ -5,8 +5,17 @@ import (
 	"github.com/tokentransfer/interfaces/core"
 )
 
+type RawType uint32
+
+const (
+	RawBinary RawType = iota
+	RawIgnoreVariableFields
+	RawIgnoreSigningFields
+)
+
 type Hashable interface {
 	core.Binariable
+	Raw(ignoreSigningFields bool) ([]byte, error)
 
 	GetHash() core.Hash
 	SetHash(h core.Hash)
@@ -22,13 +31,12 @@ type Signable interface {
 
 	SetPublicKey(p core.PublicKey)
 	GetPublicKey() core.PublicKey
-	Raw() ([]byte, error)
 }
 
 type CryptoService interface {
 	GetSize() int
 	Hash(msg []byte) (core.Hash, error)
-	Raw(h Hashable) (core.Hash, []byte, error)
+	Raw(h Hashable, t RawType) (core.Hash, []byte, error)
 	Sign(p account.Key, s Signable) error
 	Verify(s Signable) (bool, error)
 }
