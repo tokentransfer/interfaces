@@ -11,7 +11,7 @@ type Block interface {
 
 	GetParentHash() core.Hash
 	GetTransactionHash() core.Hash
-	GetReceiptHash() core.Hash
+	GetStateHash() core.Hash
 	GetTransactions() []TransactionWithData
-	GetReceipts() []Receipt
+	GetStates() []State
 }

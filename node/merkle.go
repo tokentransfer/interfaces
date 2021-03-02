@@ -26,15 +26,11 @@ type MerkleService interface {
 	GetTransactionByIndex(core.Address, uint64) (block.TransactionWithData, error)
 	GetTransactionRoot() core.Hash
 
-	PutReceipt(block.Receipt) error
-	GetReceipt(core.Hash) (block.Receipt, error)
-	GetReceiptByTransactionHash(core.Hash) (block.Receipt, error)
-	GetReceiptRoot() core.Hash
-
 	PutState(block.State) error
 	GetState(core.Hash) (block.State, error)
 	GetStateByKey(string) (block.State, error)
 	GetStateByIndex(string, uint64) (block.State, error)
+	GetStateRoot() core.Hash
 
 	Commit() error
 	Cancel() error
