@@ -34,7 +34,4 @@ type MerkleService interface {
 
 	Commit() error
 	Cancel() error
-
-	VerifyTransaction(tx block.Transaction) (bool, error)
-	ProcessTransaction(tx block.Transaction) (block.TransactionWithData, error)
 }
