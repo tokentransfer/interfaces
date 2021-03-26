@@ -14,4 +14,5 @@ type Block interface {
 	GetStateHash() core.Hash
 	GetTransactions() []TransactionWithData
 	GetStates() []State
+	GetTime() int64
 }

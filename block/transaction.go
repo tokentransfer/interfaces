@@ -5,12 +5,6 @@ import (
 	"github.com/tokentransfer/interfaces/crypto"
 )
 
-type TransactionType uint32
-
-type StateType uint32
-
-type TransactionResult uint32
-
 type Transaction interface {
 	core.Indexable
 	crypto.Signable

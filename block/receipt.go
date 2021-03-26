@@ -9,9 +9,12 @@ type Receipt interface {
 	crypto.Hashable
 
 	GetTransactionResult() TransactionResult
+	GetStates() []State
+
 	GetTransactionIndex() uint32
 	SetTransactionIndex(uint32)
-	GetStates() []State
+	GetBlockIndex() uint64
+	SetBlockIndex(uint64)
 }
 
 type State interface {
@@ -19,7 +22,9 @@ type State interface {
 	crypto.Hashable
 
 	GetStateType() StateType
+	GetAccount() core.Address
 	GetStateKey() string
+
 	GetBlockIndex() uint64
 	SetBlockIndex(uint64)
 }
