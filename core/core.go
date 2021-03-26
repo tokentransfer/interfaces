@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding"
 	"encoding/hex"
+	"errors"
 )
 
 type Binariable interface {
@@ -21,12 +22,18 @@ type Indexable interface {
 }
 
 type Config interface {
-	GetSecret() string
+	GetId() string
+	GetType() int
 	GetGasAccount() Address
 	GetDataDir() string
 	GetBootstraps() []string
 	GetAddress() string
 	GetPort() int64
+	GetThreadCount() uint32
+	GetTimeout() int64
+	GetSystemCode() string
+	GetBlockDuration() uint32
+	GetBackend() string
 }
 
 // Service name and version
@@ -40,6 +47,10 @@ type Hash []byte
 
 func (h Hash) String() string {
 	return EncodeToString(h)
+}
+
+func (h Hash) Bytes() []byte {
+	return h[:]
 }
 
 func (h Hash) Equals(a Hash) bool {
@@ -113,9 +124,32 @@ func (h Bytes) UnmarshalText(b []byte) error {
 	return err
 }
 
+type Symbol string
+
+func NewSymbol(c string) (*Symbol, error) {
+	if len(c) > 0 {
+		currency := Symbol(c)
+		return &currency, nil
+	}
+	return nil, errors.New("null symbol")
+}
+
+func (c *Symbol) Equals(b *Symbol) bool {
+	ca := c.String()
+	ba := b.String()
+	return ca == ba
+}
+
+func (c *Symbol) String() string {
+	if c != nil && len(*c) > 0 {
+		return string(*c)
+	}
+	return ""
+}
+
 type Address interface {
 	Textable
 	Binariable
 
-	GetAddress() (string, error)
+	String() string
 }

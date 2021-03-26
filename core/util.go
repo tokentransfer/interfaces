@@ -13,16 +13,13 @@ func EncodeToString(b []byte) string {
 }
 
 func Equals(a Address, b Address) bool {
+	if a == nil && b == nil {
+		return true
+	}
 	if a == nil || b == nil {
 		return false
 	}
-	aa, err := a.GetAddress()
-	if err != nil {
-		return false
-	}
-	ba, err := a.GetAddress()
-	if err != nil {
-		return false
-	}
+	aa := a.String()
+	ba := b.String()
 	return aa == ba
 }
