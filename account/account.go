@@ -4,10 +4,21 @@ import (
 	"github.com/tokentransfer/interfaces/core"
 )
 
+type KeyType uint16
+
+type Signable interface {
+	Sign(hash core.Hash, msg []byte) (core.Signature, error)
+}
+
+type Verifiable interface {
+	Verify(hash core.Hash, msg []byte, signature core.Signature) (bool, error)
+}
+
 type PublicKey interface {
+	core.Textable
 	core.Binariable
 
-	Verify(hash core.Hash, msg []byte, signature core.Signature) (bool, error)
+	Verifiable
 
 	GenerateAddress() (core.Address, error)
 }
@@ -15,6 +26,8 @@ type PublicKey interface {
 type PrivateKey interface {
 	core.Textable
 	core.Binariable
+
+	Signable
 
 	GeneratePublic() (PublicKey, error)
 	GetSecret() (string, error)
@@ -24,7 +37,8 @@ type Key interface {
 	core.Textable
 	core.Binariable
 
-	Sign(hash core.Hash, msg []byte) (core.Signature, error)
+	Signable
+	Verifiable
 
 	GetPrivate() (PrivateKey, error)
 	GetPublic() (PublicKey, error)
