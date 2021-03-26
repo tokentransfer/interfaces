@@ -20,7 +20,3 @@ type KvService interface {
 
 	ListData(func(key []byte, value []byte) error) error
 }
-
-type StoreService interface {
-	core.Service
-}
