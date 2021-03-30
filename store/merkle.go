@@ -1,8 +1,8 @@
 package store
 
 import (
-	block "github.com/tokentransfer/interfaces/block"
-	core "github.com/tokentransfer/interfaces/core"
+	"github.com/tokentransfer/interfaces/block"
+	"github.com/tokentransfer/interfaces/core"
 )
 
 type MerkleTree interface {
@@ -49,4 +49,12 @@ type MerkleService interface {
 
 	GetTransactionRoot() core.Hash
 	GetStateRoot() core.Hash
+}
+
+func GetSequence(r BlockReader, account core.Address, s ...interface{}) uint64 {
+	state, err := r.GetStateByAddress(account, s)
+	if err != nil {
+		return uint64(0)
+	}
+	return state.GetIndex()
 }
