@@ -4,8 +4,6 @@ import (
 	"github.com/tokentransfer/interfaces/core"
 )
 
-type KeyType uint16
-
 type Signable interface {
 	Sign(hash core.Hash, msg []byte) (core.Signature, error)
 }
@@ -43,4 +41,17 @@ type Key interface {
 	GetPrivate() (PrivateKey, error)
 	GetPublic() (PublicKey, error)
 	GetAddress() (core.Address, error)
+}
+
+type AccountService interface {
+	GenerateFamilySeed(password string) (KeyType, Key, error)
+
+	NewKeyFromSecret(string) (KeyType, Key, error)
+	NewKeyFromBytes([]byte) (KeyType, Key, error)
+
+	NewPublicFromHex(string) (KeyType, PublicKey, error)
+	NewPublicFromBytes([]byte) (KeyType, PublicKey, error)
+
+	NewAccountFromAddress(string) (KeyType, core.Address, error)
+	NewAccountFromBytes([]byte) (KeyType, core.Address, error)
 }
