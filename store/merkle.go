@@ -52,7 +52,7 @@ type MerkleService interface {
 }
 
 func GetSequence(r BlockReader, account core.Address, s ...interface{}) uint64 {
-	state, err := r.GetStateByAddress(account, s)
+	state, err := r.GetStateByAddress(account, s...)
 	if err != nil {
 		return uint64(0)
 	}
