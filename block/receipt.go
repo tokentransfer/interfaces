@@ -23,7 +23,7 @@ type State interface {
 
 	GetStateType() StateType
 	GetAccount() core.Address
-	GetStateKey() string
+	GetStateKey() []string
 
 	GetBlockIndex() uint64
 	SetBlockIndex(uint64)
