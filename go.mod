@@ -1,3 +1,3 @@
-module github.com/tokentranfer/interfaces
+module github.com/tokentransfer/interfaces
 
 go 1.18
