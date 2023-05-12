@@ -11,11 +11,12 @@ const (
 	RawBinary RawType = iota
 	RawIgnoreVariableFields
 	RawIgnoreSigningFields
+	RawIgnoreContent
 )
 
 type Hashable interface {
 	core.Binariable
-	Raw(ignoreSigningFields bool) ([]byte, error)
+	Raw(t RawType) ([]byte, error)
 
 	GetHash() core.Hash
 	SetHash(h core.Hash)
