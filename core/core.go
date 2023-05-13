@@ -128,8 +128,8 @@ type Symbol string
 
 func NewSymbol(c string) (*Symbol, error) {
 	if len(c) > 0 {
-		currency := Symbol(c)
-		return &currency, nil
+		s := Symbol(c)
+		return &s, nil
 	}
 	return nil, errors.New("null symbol")
 }
